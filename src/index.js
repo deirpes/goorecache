@@ -28,8 +28,7 @@ module.exports = function (mongoose, option) {
 
         const cached = await client.get(key);
         if (cached) {
-            const doc = JSON.parse(cached);
-            return Array.isArray(doc) ? doc.map(d => new this.model(d)) : new this.model(doc);
+            return JSON.parse(cached);
         }
 
         const result = await exec.apply(this, arguments);
