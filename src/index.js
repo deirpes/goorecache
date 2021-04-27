@@ -21,6 +21,9 @@ module.exports = function (mongoose, option) {
     }
 
     mongoose.Query.prototype.exec = async function () {
+        if (!this._ttl) {
+            return exec.apply(this, arguments);
+        }
         const key = this._key || Hash.md5(JSON.stringify(Object.assign({}, { name: this.model.collection.name, conditions: this._conditions, fields: this._fields, o: this.options })));
 
         const cached = await client.get(key);
@@ -31,7 +34,7 @@ module.exports = function (mongoose, option) {
 
         const result = await exec.apply(this, arguments);
         if (result) {
-            if (!this._ttl || this._ttl <= 0) {
+            if (this._ttl <= 0) {
                 client.set(key, JSON.stringify(result));
             } else {
                 client.set(key, JSON.stringify(result), "EX", this._ttl);
