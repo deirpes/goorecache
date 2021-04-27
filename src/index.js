@@ -32,7 +32,7 @@ module.exports = function (mongoose, option) {
         const result = await exec.apply(this, arguments);
         if (result) {
             if (!this._ttl || this._ttl <= 0) {
-                client.set(key, JSON.stringify(result), "EX");
+                client.set(key, JSON.stringify(result));
             } else {
                 client.set(key, JSON.stringify(result), "EX", this._ttl);
             }
