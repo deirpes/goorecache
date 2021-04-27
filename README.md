@@ -1,3 +1,5 @@
+# Goorecache
+
 Mongoose Cache: Integrated Redis caching for Mongoose queries.
 
 Best Performance Mongoose caching module that works exactly how you would expect it to, with the latest version of Mongoose.
@@ -7,7 +9,7 @@ Best Performance Mongoose caching module that works exactly how you would expect
 Install via NPM
 
 ```js
-npm install mongoose-redis --save
+npm install goorecache --save
 ```
 
 
@@ -15,14 +17,14 @@ npm install mongoose-redis --save
 
 ```js
 
-var mongoose = require('mongoose');
-var MongooseCache = require('mongoose-redis');
+const mongoose = require('mongoose');
+const Goorecache = require('goorecache');
 
 ```
 Config mongoose-redis cache
 ```js
 
-var cache = MongooseCache(mongoose, "redis://127.0.0.1:6379");
+var cache = Goorecache(mongoose, "redis://127.0.0.1:6379");
 
 ```
 
@@ -31,7 +33,7 @@ var cache = MongooseCache(mongoose, "redis://127.0.0.1:6379");
 
 var docs = await Post.find({ stt: 1 }).sort({ crt: -1 })
 .limit(30)
-.cache(120) // cache 120 seconds
+.cache(120) // cache 120 seconds or 0 for keep it forever
 .select({ tl: 1, lth:1, views:1, img: 1, slug: 1})
 
 ```
