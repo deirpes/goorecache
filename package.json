@@ -1,6 +1,6 @@
 {
   "name": "goorecache",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Mongoose Cache: Integrated Redis caching for Mongoose queries.",
   "author": {
     "name": "Chien Nguyen"
