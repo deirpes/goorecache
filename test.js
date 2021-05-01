@@ -6,5 +6,5 @@ goorecache(mongoose, "redis://127.0.0.1:6379");
 mongoose.connect("mongodb://localhost/butaca_db_production", { useNewUrlParser: true, useUnifiedTopology: true });
 
 (async () => {
-    User.find().cache(0).then(docs => console.log(docs.length));
+    User.find().populate('contents').cache(0).then(docs => console.log(docs.length));
 })()
