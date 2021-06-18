@@ -25,6 +25,7 @@ module.exports = function (mongoose, option) {
             return exec.apply(this, arguments);
         }
         const key = this._key || Hash.md5(JSON.stringify(Object.assign({}, { name: this.model.collection.name, conditions: this._conditions, fields: this._fields, o: this.options, populates: JSON.stringify(this._mongooseOptions.populate) })));
+        console.log(JSON.stringify(Object.assign({}, { name: this.model.collection.name, conditions: this._conditions, fields: this._fields, o: this.options, populates: JSON.stringify(this._mongooseOptions.populate) })))
 
         const cached = await client.get(key);
         if (cached) {
